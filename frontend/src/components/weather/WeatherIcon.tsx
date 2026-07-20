@@ -1,17 +1,22 @@
-interface Props {
+interface WeatherIconProps {
   code: number;
 }
 
-export default function WeatherIcon({ code }: Props) {
+export default function WeatherIcon({
+  code,
+}: WeatherIconProps) {
   if (code === 0) return <span className="text-7xl">☀️</span>;
 
-  if ([1,2,3].includes(code))
+  if ([1, 2, 3].includes(code))
     return <span className="text-7xl">⛅</span>;
 
-  if ([61,63,65,80,81].includes(code))
+  if ([45, 48].includes(code))
+    return <span className="text-7xl">🌫️</span>;
+
+  if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code))
     return <span className="text-7xl">🌧️</span>;
 
-  if ([71,73,75].includes(code))
+  if ([71, 73, 75].includes(code))
     return <span className="text-7xl">❄️</span>;
 
   if (code === 95)
