@@ -5,7 +5,7 @@ export const WEATHER_CODES: Record<number, string> = {
   3: "Overcast",
 
   45: "Fog",
-  48: "Depositing Rime Fog",
+  48: "Rime Fog",
 
   51: "Light Drizzle",
   53: "Moderate Drizzle",
@@ -21,6 +21,7 @@ export const WEATHER_CODES: Record<number, string> = {
 
   80: "Rain Showers",
   81: "Heavy Showers",
+  82: "Violent Showers",
 
   95: "Thunderstorm",
 };
