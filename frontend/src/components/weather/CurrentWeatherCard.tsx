@@ -1,15 +1,10 @@
 import Card from "../ui/Card";
-
 import WeatherMetric from "./WeatherMetric";
 
 import useCurrentWeather from "../../hooks/useCurrentWeather";
 
 export default function CurrentWeatherCard() {
-  const {
-    weather,
-    loading,
-    location,
-  } = useCurrentWeather();
+  const { weather, loading, location } = useCurrentWeather();
 
   if (!location) {
     return (
@@ -19,10 +14,18 @@ export default function CurrentWeatherCard() {
     );
   }
 
-  if (loading || !weather) {
+  if (loading) {
     return (
       <Card>
         Loading weather...
+      </Card>
+    );
+  }
+
+  if (!weather) {
+    return (
+      <Card>
+        Unable to load weather data.
       </Card>
     );
   }
