@@ -6,3 +6,12 @@ export interface GeoLocation {
   latitude: number;
   longitude: number;
 }
+
+export interface CurrentWeather {
+  temperature: number;
+  windspeed: number;
+  winddirection: number;
+  weathercode: number;
+  is_day: number;
+  time: string;
+}
