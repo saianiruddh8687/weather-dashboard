@@ -8,21 +8,23 @@ export default function useCurrentWeather() {
     (state) => state.selectedLocation
   );
 
-  const [weather, setWeather] = useState(null);
+  import type { CurrentWeather } from "../services/types/weather";
+
+  const [weather, setWeather] = useState<CurrentWeather | null>(null);
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!location) return;
 
-    async function loadWeather() {
-      try {
-        setLoading(true);
+const currentLocation = location;
 
-        const data = await getCurrentWeather(
-          location.latitude,
-          location.longitude
-        );
+async function loadWeather() {
+  const data = await getCurrentWeather(
+    currentLocation.latitude,
+    currentLocation.longitude
+  );
+ }
 
         setWeather(data);
       } finally {
