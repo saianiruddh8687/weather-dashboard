@@ -3,27 +3,22 @@ import { useState } from "react";
 import SearchInput from "./SearchInput";
 import SearchSuggestions from "./SearchSuggestions";
 
-const demoResults = [
-  {
-    id: 1,
-    name: "Hyderabad",
-    admin1: "Telangana",
-    country: "India",
-    latitude: 17.38,
-    longitude: 78.48,
-  },
-  {
-    id: 2,
-    name: "Chennai",
-    admin1: "Tamil Nadu",
-    country: "India",
-    latitude: 13.08,
-    longitude: 80.27,
-  },
-];
+import useCitySearch from "../../hooks/useCitySearch";
+import { useLocationStore } from "../../store/location.store";
 
 export default function WeatherSearch() {
   const [query, setQuery] = useState("");
+
+  const { results, loading } = useCitySearch(query);
+
+  const setLocation = useLocationStore(
+    (state) => state.setLocation
+  );
+
+  function handleSelect(city: any) {
+    setLocation(city);
+    setQuery(city.name);
+  }
 
   return (
     <div className="relative max-w-xl">
@@ -32,13 +27,16 @@ export default function WeatherSearch() {
         onChange={setQuery}
       />
 
-      {query.length > 1 && (
+      {loading && (
+        <p className="mt-2 text-sm text-slate-400">
+          Searching...
+        </p>
+      )}
+
+      {!loading && query.length > 1 && (
         <SearchSuggestions
-          results={demoResults}
-          onSelect={(city) => {
-            console.log(city);
-            setQuery(city.name);
-          }}
+          results={results}
+          onSelect={handleSelect}
         />
       )}
     </div>
