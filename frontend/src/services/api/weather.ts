@@ -12,7 +12,13 @@ export async function getCurrentWeather(
       params: {
         latitude,
         longitude,
-        current_weather: true,
+        current: [
+  "temperature_2m",
+  "relative_humidity_2m",
+  "apparent_temperature",
+  "weather_code",
+  "wind_speed_10m",
+]
       },
     }
   );
